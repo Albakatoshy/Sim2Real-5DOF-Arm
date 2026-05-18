@@ -1,0 +1,76 @@
+# joint_limits.yaml
+# Joint limits for the robotic arm
+# All positions in radians, velocities in rad/s, accelerations in rad/s^2, effort in Nm
+
+joint_limits:
+
+  # ─────────────────────────────────────────
+  # CONTINUOUS JOINT — no position limits
+  # ─────────────────────────────────────────
+  rotating_base_joint:
+    has_position_limits: false
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+    has_effort_limits: true
+    max_effort: 5.0
+
+  # ─────────────────────────────────────────
+  # REVOLUTE JOINTS — arm chain
+  # ─────────────────────────────────────────
+  shoulder_joint:
+    has_position_limits: true
+    min_position: -1.57
+    max_position:  1.57
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+    has_effort_limits: true
+    max_effort: 5.0
+
+  upper_arm_joint:
+    has_position_limits: false   # continuous joint
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+    has_effort_limits: true
+    max_effort: 5.0
+
+  wrist_joint:
+    has_position_limits: true
+    min_position: -1.57
+    max_position:  1.57
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+    has_effort_limits: true
+    max_effort: 5.0
+
+  gripper_base_joint:
+    has_position_limits: true
+    min_position: -1.57
+    max_position:  1.57
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+    has_effort_limits: true
+    max_effort: 5.0
+
+  # ─────────────────────────────────────────
+  # GRIPPER — actuated joint
+  # ─────────────────────────────────────────
+  left_gear_joint:
+    has_position_limits: true
+    min_position: -1.57
+    max_position:  1.57
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: true
+    max_acceleration: 1.0
+    has_effort_limits: true
+    max_effort: 5.0

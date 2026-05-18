@@ -1,0 +1,60 @@
+# joint_limits.yaml
+default_velocity_scaling_factor: 0.1
+default_acceleration_scaling_factor: 0.1
+
+joint_limits:
+
+  # ── CONTINUOUS JOINTS ──────────────────────────
+  # has_position_limits MUST be false for continuous
+  # max_velocity MUST be > 0.0
+
+  rotating_base_joint:
+    has_position_limits: false      # continuous — no position limits
+    has_velocity_limits: true
+    max_velocity: 2.0               # was 0.0 ← THIS was causing invalid state
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+
+  upper_arm_joint:
+    has_position_limits: false      # continuous — no position limits
+    has_velocity_limits: true
+    max_velocity: 2.0               # was 0.0 ← THIS was causing invalid state
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+
+  # ── REVOLUTE JOINTS ────────────────────────────
+  shoulder_joint:
+    has_position_limits: true
+    min_position: -1.57
+    max_position:  1.57
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+
+  wrist_joint:
+    has_position_limits: true
+    min_position: -1.57
+    max_position:  1.57
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+
+  gripper_base_joint:
+    has_position_limits: true
+    min_position: -1.57
+    max_position:  1.57
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0
+
+  left_gear_joint:
+    has_position_limits: true
+    min_position: -1.57
+    max_position:  1.57
+    has_velocity_limits: true
+    max_velocity: 2.0
+    has_acceleration_limits: false
+    max_acceleration: 0.0

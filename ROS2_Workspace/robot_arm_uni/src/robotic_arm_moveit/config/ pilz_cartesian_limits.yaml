@@ -1,0 +1,34 @@
+# pilz_cartesian_limits.yaml
+# Cartesian limits for the Pilz Industrial Motion Planner
+# Used by: PTP, LIN, CIRC motion commands
+# Units: meters, rad, seconds
+
+robot_description_planning:
+  cartesian_limits:
+
+    # ─────────────────────────────────────────
+    # TRANSLATIONAL LIMITS
+    # ─────────────────────────────────────────
+
+    # Maximum cartesian translational velocity (m/s)
+    max_trans_vel: 1.0
+
+    # Maximum cartesian translational acceleration (m/s^2)
+    max_trans_acc: 2.0
+
+    # Maximum cartesian translational deceleration (m/s^2)
+    # Typically same as acceleration
+    max_trans_dec: 2.0
+
+    # ─────────────────────────────────────────
+    # ROTATIONAL LIMITS
+    # ─────────────────────────────────────────
+
+    # Maximum cartesian rotational velocity (rad/s)
+    max_rot_vel: 1.57        # ~90 deg/s
+
+    # Maximum cartesian rotational acceleration (rad/s^2)
+    max_rot_acc: 2.0
+
+    # Maximum cartesian rotational deceleration (rad/s^2)
+    max_rot_dec: 2.0

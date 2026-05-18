@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>robotic_arm_moveit</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="anaalbakatoshy@gmail.com">abood</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>ros2launch</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <depend>moveit_ros_planning_interface</depend>
+  <depend>moveit_ros_move_group</depend>
+  <depend>moveit_planners_ompl</depend>
+  <depend>moveit_simple_controller_manager</depend>
+  <depend>pilz_industrial_motion_planner</depend>
+  <depend>trac_ik_kinematics_plugin</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

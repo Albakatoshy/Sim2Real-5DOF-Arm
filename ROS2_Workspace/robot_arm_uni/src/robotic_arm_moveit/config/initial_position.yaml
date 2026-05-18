@@ -1,0 +1,23 @@
+# initial_positions.yaml
+# Starting joint positions when Gazebo/MoveIt launches
+# Units: radians
+
+initial_positions:
+  # Base rotation (continuous joint - full rotation possible)
+  rotating_base_joint: 0.0
+
+  # Shoulder (revolute: -1.57 to 1.57 rad)
+  shoulder_joint: 0.0
+
+  # Upper arm (continuous joint)
+  upper_arm_joint: 0.0
+
+  # Wrist (revolute: -1.57 to 1.57 rad)
+  wrist_joint: 0.0
+
+  # Gripper base / roll (revolute: -1.57 to 1.57 rad)
+  gripper_base_joint: 0.0
+
+  # Gripper actuator — controls all mimic joints
+  # 0.0 = closed, ~0.5 = open
+  left_gear_joint: 0.0

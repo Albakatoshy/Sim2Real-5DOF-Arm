@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<library path="robotic_arm_controller">
+  <class
+    name="robotic_arm_controller/RoboticArmInterface"
+    type="robotic_arm_controller::RoboticArmInterface"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Real robot hardware interface for a 6-DOF robotic arm.
+      Communicates with an Arduino over serial to control servos.
+    </description>
+  </class>
+</library>

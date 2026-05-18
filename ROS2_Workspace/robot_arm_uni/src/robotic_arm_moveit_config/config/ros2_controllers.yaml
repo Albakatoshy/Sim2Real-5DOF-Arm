@@ -1,0 +1,51 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    gripper_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+joint_state_broadcaster:
+  ros__parameters:
+    joints:
+      - rotating_base_joint
+      - shoulder_joint
+      - upper_arm_joint
+      - wrist_joint
+      - gripper_base_joint
+      - left_gear_joint
+
+arm_controller:
+  ros__parameters:
+    joints:
+      - rotating_base_joint
+      - shoulder_joint
+      - upper_arm_joint
+      - wrist_joint
+      - gripper_base_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+gripper_controller:
+  ros__parameters:
+    joints:
+      - left_gear_joint
+      - left_link_joint
+      - rigth_link_joint
+      - rigth_gear_joint
+      - rigth_finger_joint
+      - left_finger_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity

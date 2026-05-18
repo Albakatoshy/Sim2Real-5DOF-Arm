@@ -1,0 +1,61 @@
+# moveit_controllers.yaml
+# Defines how MoveIt communicates with ros2_control controllers
+
+# ─────────────────────────────────────────
+# CONTROLLER MANAGER TIMEOUT
+# ─────────────────────────────────────────
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+  controller_names:
+    - arm_controller
+    - gripper_controller
+
+  # ─────────────────────────────────────────
+  # ARM CONTROLLER
+  # Controls: rotating_base → shoulder → upper_arm → wrist → gripper_base
+  # ─────────────────────────────────────────
+  arm_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - rotating_base_joint
+      - shoulder_joint
+      - upper_arm_joint
+      - wrist_joint
+      - gripper_base_joint
+
+  # ─────────────────────────────────────────
+  # GRIPPER CONTROLLER
+  # Controls: left_gear_joint only
+  # Mimic joints follow automatically
+  # ─────────────────────────────────────────
+  gripper_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - left_gear_joint
+
+# ─────────────────────────────────────────
+# TRAJECTORY EXECUTION SETTINGS
+# ─────────────────────────────────────────
+trajectory_execution:
+  manage_controllers: true
+  allowed_execution_duration_scaling: 1.2      # allow 20% extra time
+  allowed_goal_duration_margin: 0.5            # seconds of extra margin
+  allowed_start_tolerance: 0.01               # rad — how close to start before executing
+  execution_duration_monitoring: true
+
+# ─────────────────────────────────────────
+# PLANNING SCENE SETTINGS
+# ─────────────────────────────────────────
+planning_scene_monitor_options:
+  name: planning_scene_monitor
+  robot_description: robot_description
+  joint_state_topic: /joint_states
+  attached_collision_object_topic: /move_group/planning_scene_monitor
+  publish_planning_scene_topic: /move_group/publish_planning_scene
+  monitored_planning_scene_topic: /move_group/monitored_planning_scene
+  wait_for_initial_state_timeout: 10.0         # seconds

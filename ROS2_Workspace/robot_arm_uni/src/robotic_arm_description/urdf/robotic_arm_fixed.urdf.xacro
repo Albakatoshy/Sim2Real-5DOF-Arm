@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robotic_arm">
+
+  <xacro:arg name="is_sim" default="true"/>
+  <!-- Store it in a property for easy reuse -->
+  <xacro:property name="is_sim" value="$(arg is_sim)"/>
+
+
+  
+  <link name="world"/>
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.045429 0.054889 0.095593" rpy="0 0 0" />
+      <mass value="1.0" /> <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" /> </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/base_link.STL" />
+      </geometry>
+      <material name=""><color rgba="0.89804 0.89804 0.89804 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="rotating_base">
+    <inertial>
+      <origin xyz="-0.002655 0.043907 -0.001638" rpy="0 0 0" />
+      <mass value="1.5" /> <inertia ixx="0.015" ixy="0.0" ixz="0.0" iyy="0.015" iyz="0.0" izz="0.015" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/rotating_base.STL" />
+      </geometry>
+      <material name=""><color rgba="0.85098 0.85098 0.85098 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/rotating_base.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotating_base_joint" type="continuous">
+    <origin xyz="0.045734 -0.095711 0.032838" rpy="1.5707963267949 0 -2.24157638782666" />
+    <parent link="base_link" />
+    <child link="rotating_base" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <link name="shoulder_link">
+    <inertial>
+      <origin xyz="-0.000116 0.059531 0.008183" rpy="0 0 0" />
+      <mass value="0.5" /> <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/shoulder_link.STL" />
+      </geometry>
+      <material name=""><color rgba="0.85098 0.85098 0.85098 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/shoulder_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="shoulder_joint" type="revolute">
+    <origin xyz="0 0.096174 -0.019023" rpy="-1.5708 0.66404 -1.5708" />
+    <parent link="rotating_base" />
+    <child link="shoulder_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2" />
+  </joint>
+
+  <link name="upper_arm_link">
+    <inertial>
+      <origin xyz="0.000148 -0.039125 0.012706" rpy="0 0 0" />
+      <mass value="0.5" /> <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/upper_arm_link.STL" />
+      </geometry>
+      <material name=""><color rgba="0.85098 0.85098 0.85098 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/upper_arm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="upper_arm_joint" type="continuous">
+    <origin xyz="0 0.12 0" rpy="-3.1416 0 -0.63995" />
+    <parent link="shoulder_link" />
+    <child link="upper_arm_link" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="wrist">
+    <inertial>
+      <origin xyz="0.005042 0.034853 -0.005617" rpy="0 0 0" />
+      <mass value="0.2" /> <inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.002" iyz="0.0" izz="0.002" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/wrist.STL" />
+      </geometry>
+      <material name=""><color rgba="0.89803 0.89803 0.89803 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/wrist.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="wrist_joint" type="revolute">
+    <origin xyz="0.0050952 -0.075597 0.01245" rpy="0 -0.15187 -3.1416" />
+    <parent link="upper_arm_link" />
+    <child link="wrist" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2" />
+  </joint>
+
+  <link name="gripper_base">
+    <inertial>
+      <origin xyz="-0.016208 0.019373 0.03727" rpy="0 0 0" />
+      <mass value="0.1" /> <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/gripper_base.STL" />
+      </geometry>
+      <material name=""><color rgba="0 0.50196 1 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/gripper_base.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="gripper_base_joint" type="revolute">
+    <origin xyz="0.005 0.025813 0" rpy="-1.4289 -1.5708 0.63879" />
+    <parent link="wrist" />
+    <child link="gripper_base" />
+    <axis xyz="1 0 0" />
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2" />
+  </joint>
+
+  <link name="rigth_link">
+    <inertial>
+      <origin xyz="0.082505 0.033022 -0.025549" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/rigth_link.STL" />
+      </geometry>
+      <material name=""><color rgba="0.89803 0.89803 0.89803 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/rigth_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rigth_link_joint" type="revolute">
+    <mimic joint="left_gear_joint" multiplier="-1" offset="0"/>
+    <origin xyz="-0.014571 0 0" rpy="-3.1416 -1.1398 3.1416" />
+    <parent link="gripper_base" />
+    <child link="rigth_link" />
+    <axis xyz="0.41776 0 0.90856" />
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2" />
+  </joint>
+
+  <link name="rigth_gear">
+    <inertial>
+      <origin  xyz="-0.301020892437673 -0.201484908640087 0.00845767607368059"
+               rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/rigth_gear.STL" />
+      </geometry>
+      <material name=""><color rgba="0.29803 0.29803 0.29803 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/rigth_gear.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rigth_gear_joint" type="revolute">
+    <mimic joint="left_gear_joint" multiplier="-1" offset="0"/>
+    <origin xyz="-0.014571 0 0" rpy="-3.1416 -1.127 3.1416" />
+    <parent link="gripper_base" />
+    <child link="rigth_gear" />
+    <axis xyz="0.42935 0 0.90314" />
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2" />
+  </joint>
+
+  <link name="rigth_finger">
+    <inertial>
+      <origin  xyz="-0.313519135478169 -0.242776031359884 -0.0378170273142729" 
+               rpy="0 0 0" />
+      <mass value="0.05" /> <inertia ixx="0.0005" ixy="0.0" ixz="0.0" iyy="0.0005" iyz="0.0" izz="0.0005" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/rigth_finger.STL" />
+      </geometry>
+      <material name=""><color rgba="0.89803 0.89803 0.89803 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/rigth_finger.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rigth_finger_joint" type="revolute">
+    <mimic joint="left_gear_joint" multiplier="-1" offset="0"/>
+    <origin xyz="0 0.01 0" rpy="0 0.033058 0" />
+    <parent link="rigth_gear" />
+    <child link="rigth_finger" />
+    <axis xyz="0.39927 0 0.91684" />
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2" />
+  </joint>
+
+  <link name="left_gear">
+    <inertial>
+      <origin xyz="-0.215463345353903 0.223087104973839 0.198285384950392"
+              rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/left_gear.STL" />
+      </geometry>
+      <material name=""><color rgba="0.29803 0.29803 0.29803 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/left_gear.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_gear_joint" type="revolute">
+    <origin xyz="0 0 0" rpy="3.1416 -1.1251 0" />
+    <parent link="gripper_base" />
+    <child link="left_gear" />
+    <axis xyz="0.43106 0 0.90232" />
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2" />
+  </joint>
+
+  <link name="left_finger">
+    <inertial>
+      <origin xyz="-0.200288676905728 0.260402189681569 0.246129135086691"
+              rpy="0 0 0" />
+      <mass value="0.05" /> <inertia ixx="0.0005" ixy="0.0" ixz="0.0" iyy="0.0005" iyz="0.0" izz="0.0005" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/left_finger.STL" />
+      </geometry>
+      <material name=""><color rgba="0.89803 0.89803 0.89803 1" /></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robotic_arm_description/meshes/left_finger.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_finger_joint" type="revolute">
+    <mimic joint="left_gear_joint" multiplier="1" offset="0"/>
+    <origin xyz="-0.015076 0 -0.031558" rpy="0 0.061179 0" />
+    <parent link="left_gear" />
+    <child link="left_finger" />
+    <axis xyz="0.37509 0 0.92699" />
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2" />
+  </joint>
+
+
+<ros2_control name="RoboticArmSystem" type="system">
+  <hardware>
+    <xacro:if value="${is_sim}">
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </xacro:if>
+    <xacro:unless value="${is_sim}">
+      <plugin>robotic_arm_controller/RoboticArmInterface</plugin>
+      <param name="port">/dev/ttyACM0</param>
+    </xacro:unless>
+  </hardware>
+
+
+
+    <!-- Actuated joints (have command interfaces) -->
+    <joint name="rotating_base_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="shoulder_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="upper_arm_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="wrist_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="gripper_base_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <joint name="left_gear_joint">
+      <command_interface name="position" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+
+    <!-- Passive Mimic Joints (No interfaces needed!) -->
+    <joint name="left_link_joint">
+      <param name="mimic">left_gear_joint</param>
+      <param name="multiplier">1</param>
+    </joint>
+
+    <joint name="rigth_link_joint">
+      <param name="mimic">left_gear_joint</param>
+      <param name="multiplier">-1</param>
+    </joint>
+
+    <joint name="rigth_gear_joint">
+      <param name="mimic">left_gear_joint</param>
+      <param name="multiplier">-1</param>
+    </joint>
+
+    <joint name="rigth_finger_joint">
+      <param name="mimic">left_gear_joint</param>
+      <param name="multiplier">-1</param>
+    </joint>
+
+    <joint name="left_finger_joint">
+      <param name="mimic">left_gear_joint</param>
+      <param name="multiplier">1</param>
+    </joint>
+
+  </ros2_control>
+
+
+  <xacro:if value="${is_sim}">
+    <gazebo>
+      <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+        <parameters>$(find robotic_arm_description)/config/controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
+  </xacro:if>
+
+  <!-- ============================================== -->
+  <!-- MIMIC JOINT HANDLING                           -->
+  <!-- NOTE: Mimic joints are handled by ros2_control -->
+  <!-- through the <mimic> parameter in joints.      -->
+  <!-- Ignition gazebo-mimic-joint-system plugin is  -->
+  <!-- not available in this environment, so we rely -->
+  <!-- on ros2_control's mimic joint support.        -->
+  <!-- ============================================== -->
+
+</robot>
