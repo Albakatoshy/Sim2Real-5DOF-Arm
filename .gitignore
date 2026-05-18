@@ -1,0 +1,48 @@
+# =========================
+# SOLIDWORKS
+# =========================
+# Ignore temporary lock files and backups
+~$*.sldprt
+~$*.sldasm
+~$*.slddrw
+*.bak
+
+# =========================
+# MATLAB & SIMULINK
+# =========================
+# Ignore auto-generated code and cache files
+slprj/
+*.slxc
+*_ert_rtw/
+*_grt_rtw/
+*.asv
+*.req
+
+# =========================
+# ROS 2 & C++
+# =========================
+# Ignore build spaces and logs
+build/
+install/
+log/
+*.o
+*.obj
+
+# =========================
+# ARCHIVES & SYSTEM FILES
+# =========================
+# Ignore massive compressed files you should host elsewhere
+*.zip
+*.rar
+*.tar.gz
+*.7z
+
+# Windows/Mac OS junk
+Thumbs.db
+.DS_Store
+
+# =========================
+# VS CODE JUNK
+# =========================
+.vscode/
+*.db

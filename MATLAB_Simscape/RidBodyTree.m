@@ -1,0 +1,1 @@
+[dof55, ArmInfo] = importrobot('MainRoboticArm_Enhanced');

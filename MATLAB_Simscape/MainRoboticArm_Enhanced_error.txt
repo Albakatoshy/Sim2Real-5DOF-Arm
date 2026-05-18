@@ -1,0 +1,8 @@
+Constrained Instances: Unknown
+Constraint Name: Misaligned1
+Error Details: Constraint is not supported. The constraint has been ignored.
+---------------------------------------------------------------------------------
+Constrained Instances: 'Gear 1-1', 'Gear 2-1'
+Constraint Name: GearMate1
+Error Details: Constraint is not supported. The constraint has been exported as unknown constraint.
+---------------------------------------------------------------------------------
